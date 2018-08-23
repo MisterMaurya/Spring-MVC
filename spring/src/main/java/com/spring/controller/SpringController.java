@@ -1,6 +1,9 @@
 package com.spring.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,7 +16,26 @@ public class SpringController /*extends AbstractController */{
 		mv.addObject("msg","Hello, How are you today");
 		return mv;
 	} 
+	
+	
+	
 
+	/*@RequestMapping("/admin/{name}/{country}")
+	public ModelAndView showPage(@PathVariable("name") String name,@PathVariable("country") String country){
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("msg","welcome in spring mvc "+name+" country "+country);
+		return mv;
+	} */
+	
+	@RequestMapping("/admin/{name}/{country}")
+	public ModelAndView showPath(@PathVariable Map<String, String> var){
+		String name = var.get("name");
+		String country = var.get("country");
+		ModelAndView mv = new ModelAndView("page");
+		mv.addObject("msg","welcome in spring mvc "+name+" country "+country);
+		return mv;
+	} 
+	
 	
 	
 	
