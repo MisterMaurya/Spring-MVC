@@ -4,11 +4,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>page</title>
+<title>Registration</title>
 </head>
 <body>
+<form action="save" method="post">
+Name  :<input type="text" name="name"><br><br>
+Hobby :<input type="text" name="hobby"><br><br>
+<input type="submit" value="submit">
+
+<br><br><br>
 ${msg}
 ${name}
 ${hobby}
+
+</form>
 </body>
 </html>

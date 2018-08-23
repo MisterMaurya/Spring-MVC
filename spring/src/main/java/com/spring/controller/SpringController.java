@@ -5,6 +5,8 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -36,13 +38,34 @@ public class SpringController /*extends AbstractController */{
 		return mv;
 	} 
 	
+	@RequestMapping(value="/details", method = RequestMethod.GET)
+	public ModelAndView inputDetails(){
+		ModelAndView mv = new ModelAndView("details");
+		return mv;
+	}
 	
 	
+	/*@RequestMapping(value="/save",method = RequestMethod.POST)
+	public ModelAndView getDetails(@RequestParam("name") String name,@RequestParam("hobby") String hobby){
+		ModelAndView mv = new ModelAndView("details");
+		mv.addObject("name",name);
+		mv.addObject("hobby",hobby);
+		mv.addObject("msg","add Successfully");
+		
+		return mv;
+	}*/
 	
+	@RequestMapping(value="/save",method = RequestMethod.POST)
+	public ModelAndView getDetails(@RequestParam Map<String,String> var){
 	
+		ModelAndView mv = new ModelAndView("details");
+		mv.addObject("name",var.get("name"));
+		mv.addObject("hobby",var.get("hobby"));
+		mv.addObject("msg","add Successfully now");
+		
+		return mv;
 	
-	
-	
+	}
 	
 	
 	
