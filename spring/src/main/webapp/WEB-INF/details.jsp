@@ -13,9 +13,9 @@ Hobby :<input type="text" name="hobby"><br><br>
 <input type="submit" value="submit">
 
 <br><br><br>
-${msg}
+${msg.name}
 ${name}
-${hobby}
+${msg.hobby}
 
 </form>
 </body>

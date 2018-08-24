@@ -3,11 +3,14 @@ package com.spring.controller;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.spring.entity.Student;
 
 @Controller
 public class SpringController /*extends AbstractController */{
@@ -55,7 +58,7 @@ public class SpringController /*extends AbstractController */{
 		return mv;
 	}*/
 	
-	@RequestMapping(value="/save",method = RequestMethod.POST)
+	/*@RequestMapping(value="/save",method = RequestMethod.POST)
 	public ModelAndView getDetails(@RequestParam Map<String,String> var){
 	
 		ModelAndView mv = new ModelAndView("details");
@@ -65,8 +68,23 @@ public class SpringController /*extends AbstractController */{
 		
 		return mv;
 	
-	}
+	}*/
 	
+	/*@RequestMapping(value="/save",method=RequestMethod.POST)
+	public ModelAndView saveDetails(@RequestParam("name") String name,@RequestParam("hobby") String hobby){
+		Student student1 = new Student();
+		student1.setName(name);
+		student1.setHobby(hobby);
+		ModelAndView mv = new ModelAndView("details");
+		mv.addObject("msg",student1);
+		return mv;
+	}*/
+	
+	@RequestMapping(value="/save",method=RequestMethod.POST)
+	public ModelAndView getDetails(@ModelAttribute("msg") Student msg){
+		ModelAndView mv = new ModelAndView("details");
+		return mv;
+	}
 	
 	
 	
