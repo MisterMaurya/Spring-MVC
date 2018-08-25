@@ -1,13 +1,17 @@
 package com.spring.controller;
 
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.entity.Student;
@@ -15,10 +19,9 @@ import com.spring.entity.Student;
 @Controller
 public class SpringController /*extends AbstractController */{
 
-	@RequestMapping("/")
+	@RequestMapping(value="/",method=RequestMethod.GET)
 	public ModelAndView getIndexPage(){
-		ModelAndView mv = new ModelAndView("welcome");
-		mv.addObject("msg","Hello, How are you today");
+		ModelAndView mv = new ModelAndView("details");
 		return mv;
 	} 
 	
@@ -32,21 +35,21 @@ public class SpringController /*extends AbstractController */{
 		return mv;
 	} */
 	
-	@RequestMapping("/admin/{name}/{country}")
+	/*@RequestMapping("/admin/{name}/{country}")
 	public ModelAndView showPath(@PathVariable Map<String, String> var){
 		String name = var.get("name");
 		String country = var.get("country");
 		ModelAndView mv = new ModelAndView("page");
 		mv.addObject("msg","welcome in spring mvc "+name+" country "+country);
 		return mv;
-	} 
+	} */
 	
-	@RequestMapping(value="/details", method = RequestMethod.GET)
+	/*@RequestMapping(value="/details", method = RequestMethod.GET)
 	public ModelAndView inputDetails(){
 		ModelAndView mv = new ModelAndView("details");
 		return mv;
 	}
-	
+	*/
 	
 	/*@RequestMapping(value="/save",method = RequestMethod.POST)
 	public ModelAndView getDetails(@RequestParam("name") String name,@RequestParam("hobby") String hobby){
@@ -71,24 +74,40 @@ public class SpringController /*extends AbstractController */{
 	}*/
 	
 	/*@RequestMapping(value="/save",method=RequestMethod.POST)
-	public ModelAndView saveDetails(@RequestParam("name") String name,@RequestParam("hobby") String hobby){
+	public ModelAndView saveDetails(@RequestParam("name") String name1,@RequestParam("hobby") String hobby){
 		Student student1 = new Student();
-		student1.setName(name);
+		student1.setName(name1);
 		student1.setHobby(hobby);
 		ModelAndView mv = new ModelAndView("details");
 		mv.addObject("msg",student1);
 		return mv;
-	}*/
+	}
+	*/
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
-	public ModelAndView getDetails(@ModelAttribute("msg") Student msg){
+	public ModelAndView getDetails(@ModelAttribute("student") Student student, BindingResult res){
+		if(res.hasErrors()){
+			ModelAndView mv = new ModelAndView("details");
+			return mv;
+		}
 		ModelAndView mv = new ModelAndView("details");
 		return mv;
 	}
 	
 	
+/*	@InitBinder
+	public void initBinder(WebDataBinder binder){
+		binder.setDisallowedFields(new String[]{"id","name"});
+		SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy");
+		binder.registerCustomEditor(Date.class, "dob",new CustomDateEditor(format, false));
+	}*/
 	
 	
+	@ModelAttribute
+	public void setHeader(Model model){
+		model.addAttribute("res", "Student Registration");
+		
+	}
 	
 	
 	

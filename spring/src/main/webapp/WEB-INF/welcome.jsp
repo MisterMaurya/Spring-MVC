@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>Hello, How are you today!</h1>
-	<h2> ${msg} </h2>
+  <h2>${msg}</h2>
+	${model}
 </body>
 </html>
