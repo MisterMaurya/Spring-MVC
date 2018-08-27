@@ -2,9 +2,22 @@ package com.spring.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+/*
+@JsonInclude(JsonInclude.Include.NON_NULL)*/
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+
+@JsonPropertyOrder({"Student_Name"})
+@JsonIgnoreProperties({"password","email"})
 public class Student {
 	
 	private int id;
+	
+	@JsonProperty("Student_Name")
 	private String name;
 	private String email;
 	private String password;
