@@ -3,17 +3,18 @@ package com.spring.controller;
 import java.util.ArrayList;
 
 import org.springframework.core.SpringVersion;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.entity.Student;
 
-@Controller
+@RestController
 public class SpringRESTAPIController {
-	@ResponseBody
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	/*@ResponseBody*/
+	@RequestMapping(value = "/list", method = RequestMethod.GET,produces=MediaType.APPLICATION_XML_VALUE)
 	public ArrayList<Student> getStudentList() {
 		Student student1 = new Student();
 		Student student2 = new Student();
@@ -31,6 +32,14 @@ public class SpringRESTAPIController {
 		System.out.println("version: " + SpringVersion.getVersion());
 		return studentList;
 
+	}
+
+	@RequestMapping(value = "/list/{name}")
+	public Student getStudentInfo(@PathVariable("name") String name) {
+		Student student = new Student();
+		student.setName(name);
+		student.setId(20);
+		return student;
 	}
 
 }
